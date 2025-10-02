@@ -1,6 +1,3 @@
-mkdir cvmatch-privacy && cd $_
-git init
-cat > privacy.html << 'EOF'
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,12 +13,46 @@ cat > privacy.html << 'EOF'
 <body>
   <h1>CVMatch – Privacy Policy</h1>
   <p class="muted">Last updated: 2025-10-02</p>
-  <!-- (paste the full policy body here; update contact email) -->
+
+  <h2>Overview</h2>
+  <p><strong>CVMatch</strong> is a Chrome extension that helps you tailor your CV to the specific LinkedIn job page you are viewing. It runs locally in your browser and, by default, does not send data to the developer.</p>
+
+  <h2>Data we process</h2>
+  <ul>
+    <li><strong>CV content</strong> (text or a Google Doc URL you provide)</li>
+    <li><strong>Job description</strong> extracted from the LinkedIn job page you open</li>
+    <li><strong>Settings</strong> you choose (provider, optional model name, API key, toggles)</li>
+  </ul>
+  <p>CVMatch stores settings and the last result <strong>locally</strong> using <code>chrome.storage</code>. You can clear all stored data any time via “Clear all data”.</p>
+
+  <h2>When data may leave your device</h2>
+  <p>Only when you click <em>Check match</em>, the extension sends your CV text and the job description <strong>directly</strong> to the AI provider you choose, using <strong>your</strong> API key. This request goes from your browser to the provider; the developer does not receive, proxy, or store this data.</p>
+  <p>Supported providers may include OpenAI, Anthropic (Claude), Google (Gemini), Perplexity, and xAI (Grok). Your use of a provider is subject to that provider’s terms and privacy policy.</p>
+
+  <h2>Permissions and purpose</h2>
+  <ul>
+    <li><strong>Host permissions (linkedin.com/jobs)</strong> – read the job details on pages you open, to compute the match.</li>
+    <li><strong>Scripting</strong> – inject a minimal content script to extract job text when you ask.</li>
+    <li><strong>Side panel</strong> – show the UI (settings, progress, results).</li>
+    <li><strong>Storage</strong> – save your local settings and last result.</li>
+    <li><strong>Offscreen</strong> – reliably generate and download a <code>.docx</code> file.</li>
+    <li><strong>Alarms / Notifications</strong> – optional progress polling and completion notices for long runs.</li>
+  </ul>
+
+  <h2>Children’s privacy</h2>
+  <p>CVMatch is not intended for use by children under 13.</p>
+
+  <h2>Security</h2>
+  <ul>
+    <li>All extension code is packaged; no remote code is loaded.</li>
+    <li>Requests to AI providers use HTTPS and your API key.</li>
+    <li>You can remove data at any time via “Clear all data” or by uninstalling the extension.</li>
+  </ul>
+
+  <h2>Changes</h2>
+  <p>If we change this policy, we will update the “Last updated” date above. Material changes may also be noted in the extension release notes.</p>
+
+  <h2>Contact</h2>
+  <p>Questions? Email <a href="mailto:you@yourdomain.com">you@yourdomain.com</a>.</p>
 </body>
 </html>
-EOF
-git add privacy.html
-git commit -m "Add privacy policy"
-git branch -M main
-git remote add origin git@github.com:<your-username>/cvmatch-privacy.git
-git push -u origin main
